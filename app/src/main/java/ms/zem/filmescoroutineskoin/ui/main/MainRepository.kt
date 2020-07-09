@@ -4,9 +4,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class MainRepository {
+class MainRepository : MainRepositoryInterface {
 
-    fun getFilmes(callback: (filmes: List<Filme>) -> Unit){
+    override fun getFilmes(callback: (filmes: List<Filme>) -> Unit){
         Thread(Runnable {
             Thread.sleep(3000)
             callback.invoke(
@@ -24,7 +24,7 @@ class MainRepository {
     }
 
 
-    suspend fun getFilmesCoroutines(): List<Filme>{
+    override suspend fun getFilmesCoroutines(): List<Filme>{
         return withContext(Dispatchers.Default){
             delay(3000)
             listFilmes()

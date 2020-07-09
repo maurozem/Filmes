@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainViewModel(private val repository: MainRepository) : ViewModel() {
+class MainViewModel(private val repository: MainRepositoryInterface) : ViewModel() {
 
     private val filmesMutable = MutableLiveData<List<Filme>>()
     val filmesLiveData: LiveData<List<Filme>> = filmesMutable
@@ -29,11 +29,8 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
         }
     }
 
-
-
-
-
-    class MainViewModelFactory(private val repository: MainRepository): ViewModelProvider.Factory {
+    // não precisa mais por causa co koin
+    class MainViewModelFactory(private val repository: MainRepositoryInterface): ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return MainViewModel(repository) as T
         }
